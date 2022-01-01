@@ -1,3 +1,11 @@
+/* eslint-disable import/extensions */
+// imports
+import formResume from './template/form-resume.js'
+import homePage from './template/home.js'
+import aboutPage from './template/about.js'
+
+import Form from './forms.js'
+
 class Navigation {
   constructor(renderElement, navElement, pages) {
     this.renderElement = renderElement
@@ -22,20 +30,17 @@ class Navigation {
   }
 
   createHome() {
-    const homeContent = `
-		<div class="wrapper">
-		  <div id="banner">
-			<h1>Welcome to Resume Creator</h1>
-			<button class='btn resume-btn'>Create Resume</button>
-		  </div>
-		</div>
-	  `
+    const homeContent = homePage
     this.renderElement.innerHTML = homeContent
     const banner = document.querySelector('#banner')
     const resumeBtn = banner.querySelector('.resume-btn')
     resumeBtn.addEventListener('click', () => {
       this.getPageContent('resume')
     })
+  }
+
+  createAbout() {
+    return this
   }
 
   getPageContent(page) {
@@ -46,13 +51,19 @@ class Navigation {
         break
 
       case 'resume':
-        pageContent = this.pages[0].resume
+        pageContent = formResume
         this.renderElement.innerHTML = pageContent
+
+        // eslint-disable-next-line no-case-declarations
+        const cvForm = document.querySelector('#cv-form')
+        // eslint-disable-next-line no-case-declarations
+        const cvTemplate = document.querySelector('#cv-template')
+        new Form(cvForm, cvTemplate).init()
 
         break
 
       case 'about':
-        pageContent = this.pages[0].about
+        pageContent = aboutPage
         this.renderElement.innerHTML = pageContent
         break
 
