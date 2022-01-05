@@ -1,4 +1,3 @@
-// Functions
 class Form {
   constructor(form, template) {
     this.form = form

@@ -16,6 +16,10 @@ class Navigation {
   createNav() {
     const keys = Object.keys(this.pages[0])
     const list = document.createElement('ul')
+    const logo = document.querySelector('#logo')
+    logo.addEventListener('click', () => {
+      this.createHome()
+    })
     const navContent = keys
       .map((key) => `<li><a href="#" class="nav-link" >${key}</a></li>`)
       .join('')
